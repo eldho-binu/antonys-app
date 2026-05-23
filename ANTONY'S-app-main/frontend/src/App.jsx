@@ -21,7 +21,7 @@ import {
 import clinicLogo from './assets/logo.png';
 
 // API Configuration
-const API_BASE = `${import.meta.env.VITE_API_URL}/api`;
+const API_BASE = import.meta.env.VITE_API_URL;
 
 // Token management functions
 const getStoredToken = () => localStorage.getItem('auth_token');
