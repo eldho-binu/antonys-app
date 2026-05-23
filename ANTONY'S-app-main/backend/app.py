@@ -55,7 +55,10 @@ CORS(
 )
 
 # MongoDB Configuration
-MONGO_URI = os.getenv('MONGO_URI', 'mongodb+srv://kuzhivelildentals_db_user:zkQ8yeLuRIbO4E65@cluster0.tbaclo0.mongodb.net/')
+MONGO_URI = os.getenv(
+    'MONGO_URI',
+    'mongodb+srv://kuzhivelildentals_db_user:zkQ8yeLuRIbO4E65@cluster0.tbaclo0.mongodb.net/francis_dentals?retryWrites=true&w=majority'
+)
 
 client = None
 db = None
@@ -63,33 +66,39 @@ db = None
 def connect_to_mongodb():
     """Connect to MongoDB"""
     global client, db
-    
+
     try:
         client = MongoClient(
             MONGO_URI,
-            serverSelectionTimeoutMS=5000,
-            connectTimeoutMS=5000
+            serverSelectionTimeoutMS=10000,
+            connectTimeoutMS=10000,
+            socketTimeoutMS=10000,
+            tls=True
         )
-        
+
+        # Test connection
         client.admin.command('ping')
+
+        # Database
         db = client['francis_dentals']
-        
+
         print("✅ Connected to MongoDB successfully!")
+
         return True
-        
+
     except Exception as e:
         print(f"❌ MongoDB connection failed: {str(e)}")
         return False
 
+
 # Try to connect
 if not connect_to_mongodb():
-    print("⚠️  Starting without database connection...")
+    print("⚠️ Starting without database connection...")
+
 
 # Collections
 patients_collection = db['patients'] if db is not None else None
-admins_collection = db['admins'] if db is not None else None
-
-# JWT Helper Functions
+admins_collection = db['admins'] if db is not None else None# JWT Helper Functions
 def generate_token(admin_id, username):
     """Generate JWT token for authentication"""
     try:
