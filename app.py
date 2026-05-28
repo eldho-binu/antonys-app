@@ -324,6 +324,14 @@ def require_auth(f):
 
 # ==================== AUTH ROUTES ====================
 
+
+
+
+@app.route("/")
+def home():
+    return "Backend Running Successfully"
+
+
 @app.route('/api/auth/refresh', methods=['POST'])
 def refresh_token():
     """Add token refresh endpoint"""
