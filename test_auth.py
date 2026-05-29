@@ -4,7 +4,7 @@ import json
 def test_health():
     """Test if server is running"""
     try:
-        response = requests.get('http://127.0.0.1:5000/api/health', timeout=5)
+        response = requests.get('https://antonys-app.vercel.app/api/health', timeout=5)
         print(f"🏥 Health check: {response.status_code}")
         if response.status_code == 200:
             print(f"✅ Server is running: {response.json()}")
@@ -31,7 +31,7 @@ def test_login():
     
     try:
         response = requests.post(
-            'http://127.0.0.1:5000/api/auth/login',
+            'https://antonys-app.vercel.app/api/auth/login',
             headers={
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -88,7 +88,7 @@ def test_debug_auth(token):
     
     try:
         response = requests.get(
-            'http://127.0.0.1:5000/api/auth/debug',
+            'https://antonys-app.vercel.app/api/auth/debug',
             headers=headers,
             timeout=10
         )
@@ -124,7 +124,7 @@ def test_auth_check(token=None):
     
     try:
         response = requests.get(
-            'http://127.0.0.1:5000/api/auth/check',
+            'https://antonys-app.vercel.app/api/auth/check',
             headers=headers,
             timeout=10
         )
@@ -166,7 +166,7 @@ def test_authenticated_request(token):
     
     try:
         response = requests.get(
-            'http://127.0.0.1:5000/api/dashboard/stats',
+            'https://antonys-app.vercel.app/api/dashboard/stats',
             headers=headers,
             timeout=10
         )
