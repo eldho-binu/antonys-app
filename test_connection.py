@@ -2,7 +2,7 @@ import requests
 import sys
 
 def test_backend():
-    base_url = "http://127.0.0.1:5000"
+    base_url = "https://antonys-app.vercel.app"
     
     print("🧪 Testing backend connection...")
     
